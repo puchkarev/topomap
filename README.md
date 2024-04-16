@@ -1,8 +1,29 @@
 # topomap
+
 Topographical Maps
 
 This project fetched the bounaries and elevation data and generates stl files for 3d printing of this data.
 This project is run from google colab environment.
+
+Example map of california:
+* sampled at 500m, 
+* reference at lon=-120 lat=36 
+* scale x=0.0005 y=0.0005 z=0.005
+* segmented into 7x7 chunks
+![Screenshot from 2024-04-15 17-40-06](https://github.com/puchkarev/topomap/assets/28606823/7c744d45-266b-485d-a166-4b5216cc0bd0)
+
+With the additional printing in mm and stl units defined in miles the final scale is:
+* 2,000,000:1 for x and y
+* 200,000:1 for z
+
+Additionally the colab will add a scale legend in the bottom righ (max_x, min_y) corner, the scale marker is
+computed automatically, so pay attention to the output of the stl generator to get the size of it,
+it will be something like 10^k (1km and 1mile) where k is an integer that is based on the overall
+size of your map. For the california map this generated a scale of 10 km and 10 miles.
+
+![Screenshot from 2024-04-15 17-41-57](https://github.com/puchkarev/topomap/assets/28606823/cfc987be-af3f-4a0a-91e8-8b30e8a2b055)
+
+## Setup
 
 While the boundary data is free the elevation data api is "almost" free. It is provided by the google maps api,
 which gives a credit of $200 / month of free access, and each query costs $0.005 (but check the billing page
@@ -33,3 +54,15 @@ than a pancake.
 split_blocks_x and split_blocks_y - indicate into how many blocks you want your print to be broken down into for
 easier printing.
 
+## Cost
+
+The sampling of california at 500m scale resulted in 1,687,755 samples with 450 queries / sample = 3,751 queries
+3,751 queries * 0.005 $/q = $18.75 for the elevation map data, which is well below the $200 monthly free credit
+from the maps team. Thank you google maps team.
+
+When printing at with scale factors(x=0.0005 y=0.0005 z=0.005) with extra meters to mm conversion and broken
+into 7x7 chunks and printing with a raft (to avoid warping). The biggest chunk consumed (74.34g of PLA) and
+took 6.5 hours to print. Note that most blocks were smaller and took about 35g of PLA and 4 hours to print.
+Also note that some blocks were empty and I deleted them, but you may want a complete base.
+
+So at ~35g/block * 49 blocks = 1,715g of PLA. 1kg of PLA costs about $13 so $22.295 of PLA cost.
