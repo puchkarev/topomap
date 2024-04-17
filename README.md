@@ -25,6 +25,10 @@ size of your map. For the california map this generated a scale of 10 km and 10 
 
 ## Setup
 
+The only thing you need out of this repo to run this is the colab Topologica_Map_Generator.ipynb everything
+else is either instructions, license or the resulting output files, and you can open the colab directly from
+this repository by clicking the Open in Colab at the top of that file.
+
 While the boundary data is free the elevation data api is "almost" free. It is provided by the google maps api,
 which gives a credit of $200 / month of free access, and each query costs $0.005 (but check the billing page
 for updated info). To get access to this data you need to configure a google project, enable the elevation maps
